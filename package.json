@@ -6,7 +6,7 @@
   "author": {
     "name": "Matthias Gattermeier",
     "email": "matthias.gattermeier@gmail.com",
-    "url": "www.gattermeier.net"
+    "url": "http://www.gattermeier.net"
   },
   "contributors": [],
   "files": [
@@ -20,7 +20,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "gulp dev",
+    "start": "node server/index.js",
+    "dev": "gulp dev",
     "test": "gulp test",
     "coverage": "gulp check"
   },

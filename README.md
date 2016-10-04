@@ -1,19 +1,7 @@
 # gattermeier2016 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> 
 
-## Installation
 
-```sh
-$ npm install --save gattermeier2016
-```
 
-## Usage
-
-```js
-var gattermeier2016 = require('gattermeier2016');
-
-gattermeier2016('Rainbow');
-```
 ## License
 
 MIT © [Matthias Gattermeier](www.gattermeier.net)
