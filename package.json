@@ -1,0 +1,40 @@
+{
+  "name": "gattermeier-2016",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "www.gattermeier.net",
+  "author": {
+    "name": "Matthias Gattermeier",
+    "email": "matthias.gattermeier@gmail.com",
+    "url": "www.gattermeier.net"
+  },
+  "contributors": [],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "Gattermeier/gattermeier2016"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "gulp dev",
+    "test": "gulp test",
+    "coverage": "gulp check"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "electrode-archetype-react-app": "^1.0.0",
+    "electrode-confippet": "^1.0.0",
+    "electrode-router-resolver-engine": "^1.0.0",
+    "electrode-server": "^1.0.0",
+    "electrode-static-paths": "^1.0.0",
+    "lodash": "^4.10.1"
+  },
+  "devDependencies": {
+    "electrode-archetype-react-app-dev": "^1.0.0",
+    "gulp": "^3.9.1"
+  }
+}
