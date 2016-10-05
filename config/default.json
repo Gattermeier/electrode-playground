@@ -12,6 +12,9 @@
         "pathPrefix": "dist"
       }
     },
+    "github": {
+      "module": "./server/plugins/github"
+    },
     "webapp": {
       "module": "./server/plugins/webapp",
       "options": {

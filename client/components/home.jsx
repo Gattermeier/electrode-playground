@@ -1,13 +1,30 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Section from './Section';
-import Collection from './Collection.jsx';
+import Collection from './Collection';
 
+// dummy data
 const data = [
-  {title: 'test', description: 'adfggr'},
-  {title: 'test', description: 'adfggr'}
+  { title: 'test', description: 'adfggr' },
+  { title: 'test', description: 'adfggr' }
 ]
 
+class HomeWrapper extends React.Component {
+  render() {
+    return (
+     <Home data={this.props.data}/>
+    );
+  }
+}
+
 export class Home extends Component {
+  componentDidMount() {
+    fetch('/github', { method: 'GET' })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res)
+    })
+  }
   render() {
     return (
       <div>
@@ -22,3 +39,11 @@ export class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  data: state.data
+});
+
+export default connect(
+  mapStateToProps
+)(HomeWrapper);

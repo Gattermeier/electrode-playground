@@ -1,8 +1,11 @@
-import React from "react";
-import {routes} from "./routes";
-import {Router} from "react-router";
-import {Resolver} from "react-resolver";
-import "./styles/base.css";
+import React from 'react';
+import { routes } from './routes';
+import { browserHistory, Router } from 'react-router';
+import { createStore, compose } from 'redux';
+import { Resolver } from 'react-resolver';
+import { Provider } from 'react-redux';
+
+import './styles/base.css';
 
 //
 // Add the client app start up code to a function as window.webappStart.
@@ -10,10 +13,22 @@ import "./styles/base.css";
 // DOM is created.
 //
 
+const initialState = window.__PRELOADED_STATE__;
+const rootReducer = (s, a) => s;
+const enhancer = compose(
+  // here is where the middleware goes..
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : (f) => f
+  );
+const store = createStore(rootReducer, initialState, enhancer);
+
 window.webappStart = () => {
   Resolver.render(
-    () => <Router>{routes}</Router>,
-    document.querySelector(".js-content")
-
+    () =>
+      <Provider store={store}>
+        <div>
+          <Router history={browserHistory}>{routes}</Router>
+        </div>
+      </Provider>,
+    document.querySelector('.js-content')
   );
 };
