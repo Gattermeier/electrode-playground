@@ -24,10 +24,12 @@
   },
   "scripts": {
     "heroku-postbuild": "gulp build",
-    "heroku-prod": "gulp server-prod",
+    "bundle": "./node_modules/gulp/bin/gulp.js build",
     "server-prod": "./node_modules/gulp/bin/gulp.js server-prod",
-    "start": "npm run heroky-prod",
-    "gcp-deploy": "gcloud app deploy --project",
+    "postinstall": "npm run bundle",
+    "prestart": "npm run bundle",
+    "start": "npm run server-prod",
+    "deploy": "gcloud app deploy",
     "dev": "./node_modules/gulp/bin/gulp.js dev",
     "test": "./node_modules/gulp/bin/gulp.js test",
     "coverage": "./node_modules/gulp/bin/gulp.js check"

@@ -1,4 +1,7 @@
 {
+  "electrode": {
+    "registerPluginsTimeout": 100000
+  },
   "plugins": {
     "inert": {
       "enable": true
