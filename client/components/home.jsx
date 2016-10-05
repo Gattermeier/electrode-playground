@@ -30,10 +30,10 @@ export class Home extends Component {
       <div>
         <h1>Hello World</h1>
         <Section type='left'>
+          Masonry example:
           <Collection data={data} />
         </Section>
         <Section type='right'>
-          Right Side?
         </Section>
       </div>
     );

@@ -1,8 +1,8 @@
 {
-  "name": "gattermeier-2016",
+  "name": "electrode-playground",
   "version": "0.0.1",
   "description": "",
-  "homepage": "www.gattermeier.net",
+  "homepage": "https://electrode-playground.herokuapp.com/",
   "author": {
     "name": "Matthias Gattermeier",
     "email": "matthias.gattermeier@gmail.com",
@@ -16,7 +16,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "Gattermeier/gattermeier2016"
+    "url": "Gattermeier/electrode-playground"
   },
   "license": "MIT",
   "engines": {
