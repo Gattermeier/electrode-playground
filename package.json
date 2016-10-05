@@ -42,7 +42,8 @@
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
     "gulp": "^3.9.1",
-    "lodash": "^4.10.1"
+    "lodash": "^4.10.1",
+    "react-masonry-component": "^4.2.1"
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^1.0.0",
