@@ -25,7 +25,7 @@
   "scripts": {
     "heroku-postbuild": "gulp build",
     "bundle": "./node_modules/gulp/bin/gulp.js build",
-    "server-prod": "./node_modules/gulp/bin/gulp.js server-prod",
+    "server-prod": "gulp server-prod",
     "postinstall": "npm run bundle",
     "prestart": "npm run bundle",
     "start": "npm run server-prod",
