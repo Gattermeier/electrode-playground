@@ -1,6 +1,6 @@
 {
   "name": "gattermeier-2016",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "homepage": "www.gattermeier.net",
   "author": {
@@ -19,11 +19,19 @@
     "url": "Gattermeier/gattermeier2016"
   },
   "license": "MIT",
+  "engines": {
+    "node": "4.6.x"
+  },
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "gulp dev",
-    "test": "gulp test",
-    "coverage": "gulp check"
+    "bundle": "./node_modules/gulp/bin/gulp.js build",
+    "server-prod": "./node_modules/gulp/bin/gulp.js server-prod",
+    "postinstall": "npm run bundle",
+    "prestart": "npm run bundle",
+    "start": "npm run server-prod",
+    "deploy": "gcloud app deploy --project",
+    "dev": "./node_modules/gulp/bin/gulp.js dev",
+    "test": "./node_modules/gulp/bin/gulp.js test",
+    "coverage": "./node_modules/gulp/bin/gulp.js check"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -32,6 +40,7 @@
     "electrode-router-resolver-engine": "^1.0.0",
     "electrode-server": "^1.0.0",
     "electrode-static-paths": "^1.0.0",
+    "gulp": "^3.9.1",
     "lodash": "^4.10.1"
   },
   "devDependencies": {

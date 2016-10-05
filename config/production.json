@@ -1,2 +1,16 @@
 {
+  "server": {
+    "connections": {
+      "compression": true
+    },
+    "debug": {
+      "log": false,
+      "request": false
+    }
+  },
+  "connections": {
+    "default": {
+      "port": 8080
+    }
+  }
 }
