@@ -12,6 +12,7 @@ export default class Collection extends Component {
   }
   render() {
     const { data } = this.props
+    console.log(data)
     const childElements = data && data.map((item) => <ListItem item={item} />)
     return (
       <Masonry

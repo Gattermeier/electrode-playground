@@ -12,6 +12,13 @@
         "pathPrefix": "dist"
       }
     },
+    "api": {
+      "module": "./server/plugins/api",
+      "options": {
+        "routes": { "prefix": "guides"},
+        "pathPrefix": "guides"
+      }
+    },
     "github": {
       "module": "./server/plugins/github"
     },

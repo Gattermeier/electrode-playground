@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const _ = require("lodash");
-const Promise = require("bluebird");
-const fs = require("fs");
-const Path = require("path");
-const assert = require("assert");
+const _ = require('lodash');
+const Promise = require('bluebird');
+const fs = require('fs');
+const Path = require('path');
+const assert = require('assert');
 
 const HTTP_ERROR_500 = 500;
 const HTTP_REDIRECT = 302;
@@ -22,9 +22,9 @@ function loadAssetsFromStats(statsFilePath) {
     .then((stats) => {
       const assets = {};
       _.each(stats.assetsByChunkName.main, (v) => {
-        if (v.endsWith(".js")) {
+        if (v.endsWith('.js')) {
           assets.js = v;
-        } else if (v.endsWith(".css")) {
+        } else if (v.endsWith('.css')) {
           assets.css = v;
         }
       });
@@ -34,23 +34,23 @@ function loadAssetsFromStats(statsFilePath) {
 }
 
 function makeRouteHandler(options, userContent) {
-  const CONTENT_MARKER = "{{SSR_CONTENT}}";
-  const BUNDLE_MARKER = "{{WEBAPP_BUNDLES}}";
-  const TITLE_MARKER = "{{PAGE_TITLE}}";
-  const PREFETCH_MARKER = "{{PREFETCH_BUNDLES}}";
+  const CONTENT_MARKER = '{{SSR_CONTENT}}';
+  const BUNDLE_MARKER = '{{WEBAPP_BUNDLES}}';
+  const TITLE_MARKER = '{{PAGE_TITLE}}';
+  const PREFETCH_MARKER = '{{PREFETCH_BUNDLES}}';
   const WEBPACK_DEV = options.webpackDev;
   const RENDER_JS = options.renderJS;
   const RENDER_SS = options.serverSideRendering;
-  const html = fs.readFileSync(Path.join(__dirname, "index.html")).toString();
+  const html = fs.readFileSync(Path.join(__dirname, 'index.html')).toString();
   const assets = options.__internals.assets;
   const devJSBundle = options.__internals.devJSBundle;
   const devCSSBundle = options.__internals.devCSSBundle;
 
   /* Create a route handler */
   return (request, reply) => {
-    const mode = request.query.__mode || "";
-    const renderJs = RENDER_JS && mode !== "nojs";
-    const renderSs = RENDER_SS && mode !== "noss";
+    const mode = request.query.__mode || '';
+    const renderJs = RENDER_JS && mode !== 'nojs';
+    const renderSs = RENDER_SS && mode !== 'noss';
 
     const bundleCss = () => {
       return WEBPACK_DEV ? devCSSBundle : assets.css && `/js/${assets.css}` || "";
@@ -64,6 +64,7 @@ function makeRouteHandler(options, userContent) {
     };
 
     const callUserContent = (content) => {
+
       const x = content(request);
       return !x.catch ? x : x.catch((err) => {
         return Promise.reject({
@@ -75,21 +76,21 @@ function makeRouteHandler(options, userContent) {
 
     const makeBundles = () => {
       const css = bundleCss();
-      const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : "";
+      const cssLink = css ? `<link rel="stylesheet" href="${css}" />` : '';
       const js = bundleJs();
-      const jsLink = js ? `<script src="${js}"></script>` : "";
+      const jsLink = js ? `<script src="${js}"></script>` : '';
       return `${cssLink}${jsLink}`;
     };
 
     const addPrefetch = (prefetch) => {
-      return prefetch ? `<script>${prefetch}</script>` : "";
+      return prefetch ? `<script>${prefetch}</script>` : '';
     };
 
     const renderPage = (content) => {
       return html.replace(/{{[A-Z_]*}}/g, (m) => {
         switch (m) {
         case CONTENT_MARKER:
-          return content.html || "";
+          return content.html || '';
         case TITLE_MARKER:
           return options.pageTitle;
         case BUNDLE_MARKER:
@@ -103,9 +104,11 @@ function makeRouteHandler(options, userContent) {
     };
 
     const renderSSRContent = (content) => {
+      // if a function then execute to get actual content results
+      // otherwise assume a plain content object
       const p = _.isFunction(content) ?
         callUserContent(content) :
-        Promise.resolve(_.isObject(content) ? content : {html: content});
+        Promise.resolve(_.isObject(content) ? content : { html: content });
       return p.then((c) => renderPage(c));
     };
 
@@ -114,12 +117,12 @@ function makeRouteHandler(options, userContent) {
       if (status === HTTP_REDIRECT) {
         reply.redirect(data.path);
       } else {
-        reply({message: "error"}).code(status);
+        reply({ message: 'error' }).code(status);
       }
     };
 
     const doRender = () => {
-      return renderSs ? renderSSRContent(userContent) : renderPage("");
+      return renderSs ? renderSSRContent(userContent) : renderPage('');
     };
 
     Promise.try(doRender)
@@ -135,21 +138,21 @@ function makeRouteHandler(options, userContent) {
 const registerRoutes = (server, options, next) => {
 
   const pluginOptionsDefaults = {
-    pageTitle: "Untitled Electrode Web Application",
-    webpackDev: process.env.WEBPACK_DEV === "true",
+    pageTitle: 'Untitled Electrode Web Application',
+    webpackDev: process.env.WEBPACK_DEV === 'true',
     renderJS: true,
     serverSideRendering: true,
     devServer: {
-      host: "127.0.0.1",
-      port: "2992"
+      host: '127.0.0.1',
+      port: '2992'
     },
     paths: {},
-    stats: "dist/server/stats.json"
+    stats: 'dist/server/stats.json'
   };
 
   const resolveContent = (content) => {
     if (!_.isString(content) && !_.isFunction(content) && content.module) {
-      const module = content.module.startsWith(".") ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
+      const module = content.module.startsWith('.') ? Path.join(process.cwd(), content.module) : content.module; // eslint-disable-line
       return require(module); // eslint-disable-line
     }
 
